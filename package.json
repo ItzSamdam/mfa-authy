@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/node": "^20.10.6"
+  },
+  "dependencies": {
+    "uri-js": "^4.4.1"
+  }
+}
