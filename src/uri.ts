@@ -1,6 +1,6 @@
 // src/uri.ts
-import { encodeURI, encodeURIComponent } from 'uri-js';
-import { generateGoogleAuthKey } from './otp';
+import * as URI from 'uri-js';  // Import the entire module
+
 
 export function generateTotpUri(
     secret: string,
@@ -10,21 +10,20 @@ export function generateTotpUri(
     digits: number,
     period: number
 ): string {
+    const sanitizedSecret = secret.replace(/[\s\.\_\-]+/g, '').toUpperCase();
+    const encodedIssuer = URI.serialize(URI.parse(issuer || ''));  // Use URI.parse and URI.serialize for encoding
+    const encodedAccountName = URI.serialize(URI.parse(accountName || ''));  // Use URI.parse and URI.serialize for encoding
+    const algorithm = algo || 'SHA1';
+    const numDigits = digits || 6;
+    const timePeriod = period || 30;
+
     return (
-        'otpauth://totp/' +
-        encodeURI(issuer || '') +
-        ':' +
-        encodeURI(accountName || '') +
-        '?secret=' +
-        secret.replace(/[\s\.\_\-]+/g, '').toUpperCase() +
-        '&issuer=' +
-        encodeURIComponent(issuer || '') +
-        '&algorithm=' +
-        (algo || 'SHA1') +
-        '&digits=' +
-        (digits || 6) +
-        '&period=' +
-        (period || 30)
+        `otpauth://totp/${encodedIssuer}:${encodedAccountName}` +
+        `?secret=${sanitizedSecret}` +
+        `&issuer=${encodeURIComponent(issuer || '')}` +  // Use standard JavaScript encodeURIComponent
+        `&algorithm=${algorithm}` +
+        `&digits=${numDigits}` +
+        `&period=${timePeriod}`
     );
 }
 
