@@ -6,6 +6,11 @@
     "@types/notp": "^2.0.5",
     "notp": "^2.0.3",
     "thirty-two": "^1.0.2",
-    "uri-js": "^4.4.1"
+    "uri-js": "^4.4.1",
+    "@types/crypto": "^1.0.0",
+    "@types/thirty-two": "^2.0.0",
+    "crypto": "^1.0.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.5.0"
   }
 }

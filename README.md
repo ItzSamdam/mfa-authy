@@ -27,17 +27,9 @@ var tfa = require('node-2fa');
 ### Generate a new secret
 
 ```javascript
-
+var secret = tfa.generateSecret();
 ```
 
-### Generate a new secret with custom length
+### Verify a token
 
 ```javascript
-
-```
-
-### Generate a new secret with custom name
-
-```javascript
-
-```
