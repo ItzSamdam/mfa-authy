@@ -33,3 +33,5 @@ var secret = tfa.generateSecret();
 ### Verify a token
 
 ```javascript
+var verify = tfa.verify(value);
+```
