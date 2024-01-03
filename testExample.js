@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { generateSecret, generateToken, verifyToken } from "./dist";
+import { generateSecret, generateToken, verifyToken } from "./src/index";
 
 console.log("############################################");
 console.log("Generating New MFA Secret");

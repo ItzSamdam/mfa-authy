@@ -1,4 +1,4 @@
-// tests/test.ts
+// test/test.ts
 import {
     generateMFAAuthKey,
     generateMFAAuthToken,

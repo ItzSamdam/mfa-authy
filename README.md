@@ -1,7 +1,11 @@
 # node-2fa 
 Node Two-and multi-factor authentication (2FA / MFA) for node.js
+    
+[![npm](https://img.shields.io/npm/dm/node-2fa.svg)](https://www.npmjs.com/package/node-2fa)
+[![npm](https://img.shields.io/npm/dt/node-2fa.svg)](https://www.npmjs.com/package/node-2fa)
+[![npm](https://img.shields.io/npm/l/node-2fa.svg)](https://www.npmjs.com/package/node-2fa)
 
-[![Build Status](https://travis-ci.org/bellstrand/node-2fa.svg?branch=master)](https://travis-ci.org/bellstrand/node-2fa) [![Coverage Status](https://coveralls.io/repos/github/bellstrand/node-2fa/badge.svg?branch=master)](https://coveralls.io/github/bellstrand/node-2fa?branch=master) [![npm version](https://badge.fury.io/js/node-2fa.svg)](https://badge.fury.io/js/node-2fa) [![Dependency Status](https://david-dm.org/bellstrand/node-2fa.svg)](https://david-dm.org/bellstrand/node-2fa) [![devDependency Status](https://david-dm.org/bellstrand/node-2fa/dev-status.svg)](https://david-dm.org/bellstrand/node-2fa#info=devDependencies)
+## About
 
 Many websites employ the following apps to provide you with 6-digit codes when you log in, enhancing security:
 
