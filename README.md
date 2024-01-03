@@ -1,9 +1,6 @@
 # node-2fa 
 Node Two-and multi-factor authentication (2FA / MFA) for node.js
-    
-[![npm](https://img.shields.io/npm/dm/node-2fa.svg)](https://www.npmjs.com/package/node-2fa)
-[![npm](https://img.shields.io/npm/dt/node-2fa.svg)](https://www.npmjs.com/package/node-2fa)
-[![npm](https://img.shields.io/npm/l/node-2fa.svg)](https://www.npmjs.com/package/node-2fa)
+
 
 ## About
 
