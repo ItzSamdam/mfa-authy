@@ -7,8 +7,7 @@
         "sourceMap": false,
         "declaration": true,
         "rootDir": "src",
-        "outDir": "dist",
-        "importHelpers": true
+        "outDir": "dist"
     },
     "include": [
         "src/**/*.ts",
