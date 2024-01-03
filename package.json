@@ -3,22 +3,46 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "private": false,
   "scripts": {
-    "build": "tsc",
-    "test": "jest"
+    "test": "eslint . --fix&&jest",
+    "prepublishOnly": "npm run test&&npm run build",
+    "build": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ItzSamdam/node-2fa"
+  },
+  "keywords": [
+    "auth",
+    "2fa",
+    "mfa",
+    "token",
+    "key",
+    "base32",
+    "code",
+    "generator"
+  ],
+  "contributors": [
+    "Samuel Owadayo <odevservices@gmail.com>"
+  ],
+  "homepage": "https://github.com/ItzSamdam/node-2fa#readme",
   "devDependencies": {
-    "@types/node": "^20.10.6"
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.6",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1"
   },
   "dependencies": {
     "@types/notp": "^2.0.5",
+    "crypto": "^1.0.0",
     "notp": "^2.0.3",
     "thirty-two": "^1.0.2",
-    "uri-js": "^4.4.1",
-    "@types/crypto": "^1.0.0",
-    "@types/thirty-two": "^2.0.0",
-    "crypto": "^1.0.0",
     "ts-node": "^10.0.0",
-    "typescript": "^4.5.0"
+    "typescript": "^4.5.0",
+    "uri-js": "^4.4.1"
   }
 }
