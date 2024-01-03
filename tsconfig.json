@@ -1,16 +1,19 @@
-// tsconfig.json
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "ES6",
         "module": "commonjs",
         "strict": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "sourceMap": false,
+        "declaration": true,
+        "rootDir": "src",
+        "outDir": "dist"
     },
     "include": [
         "src/**/*.ts",
-        "tests/**/*.ts"
+        "test/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules", "dist", "test"
     ]
 }

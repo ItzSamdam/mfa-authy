@@ -1,4 +1,4 @@
-// tests/test.ts
+// test/test.ts
 import {
     generateMFAAuthKey,
     generateMFAAuthToken,
@@ -9,18 +9,18 @@ import {
 function runTests() {
     // Test generateGoogleAuthKey
     const generatedKey = generateMFAAuthKey();
-    console.log('Generated Google Authenticator Key:', generatedKey);
+    console.log('Generated Authenticator Key:', generatedKey);
 
     // Test generateGoogleAuthToken
     const generatedToken = generateMFAAuthToken(generatedKey);
-    console.log('Generated Google Authenticator Token:', generatedToken);
+    console.log('Generated Authenticator Token:', generatedToken);
 
     // Test verifyGoogleAuthToken
     const isTokenValid = verifyMFAAuthToken(generatedKey, generatedToken);
-    console.log('Is Google Authenticator Token Valid?', isTokenValid);
+    console.log('Is Authenticator Token Valid?', isTokenValid);
 
     // Test generateTotpUri
-    const totpUri = generateTotpUri(generatedKey, 'user@example.com', 'MyApp', 'SHA256', 8, 60);
+    const totpUri = generateTotpUri(generatedKey, 'user@example.com', 'MyAuthenticatorApp', 'SHA256', 8, 60);
     console.log('Generated TOTP URI:', totpUri);
 }
 

@@ -10,7 +10,7 @@ export function generateTotpUri(
     digits: number,
     period: number
 ): string {
-    const sanitizedSecret = secret.replace(/[\s\.\_\-]+/g, '').toUpperCase();
+    const sanitizedSecret = secret.replace(/[\s._-]+/g, '').toUpperCase();
     const encodedIssuer = URI.serialize(URI.parse(issuer || ''));  // Use URI.parse and URI.serialize for encoding
     const encodedAccountName = URI.serialize(URI.parse(accountName || ''));  // Use URI.parse and URI.serialize for encoding
     const algorithm = algo || 'SHA1';
