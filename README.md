@@ -1,16 +1,13 @@
-# node-2fa 
-Node Js 2FA/MFA Library
-
-
-## About
+# MFA-AUTHY
 
 This TypeScript library provides functions for Multi-Factor Authentication (MFA), including generating MFA authentication keys, tokens, verifying tokens, and generating Time-based One-Time Password (TOTP) URIs.
+It Can be with various authenticator devices, including Google Authenticator, Authy, and Microsoft Authenticator.
 
 ## Installation
 Install the package using npm:
 
 ```bash
-npm install node-2fa
+npm install mfa-authy
 ```
 
 ## Usage

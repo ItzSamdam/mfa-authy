@@ -1,5 +1,5 @@
 {
-  "name": "node-2fa",
+  "name": "mfa-authy",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,8 @@
     "key",
     "base32",
     "code",
-    "generator"
+    "generator",
+    "mfa-authy"
   ],
   "contributors": [
     "Samuel Owadayo <odevservices@gmail.com>"
