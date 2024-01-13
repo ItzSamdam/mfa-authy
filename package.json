@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ItzSamdam/node-2fa"
+    "url": "git+https://github.com/ItzSamdam/mfa-authy"
   },
   "keywords": [
     "node-2fa",
@@ -28,7 +28,7 @@
   "contributors": [
     "Samuel Owadayo <odevservices@gmail.com>"
   ],
-  "homepage": "https://github.com/ItzSamdam/node-2fa#readme",
+  "homepage": "https://github.com/ItzSamdam/mfa-authy#readme",
   "devDependencies": {
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.6",
