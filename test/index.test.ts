@@ -1,3 +1,5 @@
+
+
 // test/test.ts
 import {
     generateMFAAuthKey,
@@ -6,23 +8,31 @@ import {
     generateTotpUri,
 } from '../src/index';
 
-function runTests() {
-    // Test generateGoogleAuthKey
-    const generatedKey = generateMFAAuthKey();
-    console.log('Generated Authenticator Key:', generatedKey);
+describe('MFA Functions', () => {
+    test('generateMFAAuthKey should return a non-empty string', () => {
+        const generatedKey = generateMFAAuthKey();
+        expect(typeof generatedKey).toBe('string');
+        expect(generatedKey.length).toBeGreaterThan(0);
+    });
 
-    // Test generateGoogleAuthToken
-    const generatedToken = generateMFAAuthToken(generatedKey);
-    console.log('Generated Authenticator Token:', generatedToken);
+    test('generateMFAAuthToken should return a non-empty string', () => {
+        const generatedKey = generateMFAAuthKey();
+        const generatedToken = generateMFAAuthToken(generatedKey);
+        expect(typeof generatedToken).toBe('string');
+        expect(generatedToken.length).toBeGreaterThan(0);
+    });
 
-    // Test verifyGoogleAuthToken
-    const isTokenValid = verifyMFAAuthToken(generatedKey, generatedToken);
-    console.log('Is Authenticator Token Valid?', isTokenValid);
+    test('verifyMFAAuthToken should return true for a valid token', () => {
+        const generatedKey = generateMFAAuthKey();
+        const generatedToken = generateMFAAuthToken(generatedKey);
+        const isTokenValid = verifyMFAAuthToken(generatedKey, generatedToken);
+        expect(isTokenValid).toBe(true);
+    });
 
-    // Test generateTotpUri
-    const totpUri = generateTotpUri(generatedKey, 'user@example.com', 'MyAuthenticatorApp', 'SHA256', 8, 60);
-    console.log('Generated TOTP URI:', totpUri);
-}
-
-// Run the tests
-runTests();
+    test('generateTotpUri should return a valid URI', () => {
+        const generatedKey = generateMFAAuthKey();
+        const totpUri = generateTotpUri(generatedKey, 'user@example.com', 'MyAuthenticatorApp', 'SHA256', 8, 60);
+        // Add more specific expectations for the generated URI if needed
+        expect(typeof totpUri).toBe('string');
+    });
+});
