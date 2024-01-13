@@ -1,7 +1,5 @@
-// src/uri.ts
-import * as URI from 'uri-js';  // Import the entire module
-import * as qrcode from 'qrcode';  // Import the entire module
-
+import * as URI from 'uri-js';
+import * as qrcode from 'qrcode';
 
 export async function generateTotpUri(
     secret: string,
@@ -30,4 +28,3 @@ export async function generateTotpUri(
     const qrCodeDataURL = await qrcode.toDataURL(uri);
     return qrCodeDataURL;
 }
-
