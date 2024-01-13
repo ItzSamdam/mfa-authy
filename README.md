@@ -19,7 +19,7 @@ import {
     generateMFAAuthToken,
     verifyMFAAuthToken,
     generateTotpUri,
-} from 'node-2fa';
+} from 'mfa-authy';
 ```
 
 ### Generating MFA Authentication Key

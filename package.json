@@ -14,7 +14,6 @@
     "url": "git+https://github.com/ItzSamdam/mfa-authy"
   },
   "keywords": [
-    "node-2fa",
     "auth",
     "2fa",
     "mfa",
