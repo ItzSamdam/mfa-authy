@@ -1,5 +1,9 @@
 # MFA-AUTHY
 
+
+[![npm version](https://badge.fury.io/js/mfa-authy.svg)](https://badge.fury.io/js/mfa-authy)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This TypeScript library provides functions for Multi-Factor Authentication (MFA), including generating MFA authentication keys, tokens, verifying tokens, and generating Time-based One-Time Password (TOTP) URIs.
 
 It Can be with various authenticator devices, including 
