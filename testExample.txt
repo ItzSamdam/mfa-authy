@@ -1,0 +1,110 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const mfaAuthy = require('mfa-authy');
+
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.json());
+app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true }));
+
+// Example user data (replace this with your user authentication system)
+const users = {
+    'user@example.com': {
+        password: 'password123',
+        mfaSecret: null, // To be set during MFA setup
+        mfaEnabled: false //boolean
+    },
+};
+
+// Middleware to check if the user is authenticated
+function isAuthenticated(req, res, next) {
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Unauthorized' });
+    }
+}
+
+// Endpoint to initiate login with 2FA
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+
+    // Check if user exists and password is correct
+    if (users[email] && users[email].password === password) {
+        req.session.user = { email };
+
+        // Check if MFA is already set up for the user
+        if (users[email].mfaSecret && users[email].mfaEnabled) {
+            res.json({ requireMFA: true });
+        } else {
+            res.json({ requireMFA: false });
+        }
+    } else {
+        res.status(401).json({ error: 'Invalid credentials' });
+    }
+});
+
+// Endpoint to set up MFA
+app.post('/setup-mfa', isAuthenticated, (req, res) => {
+    const { email } = req.session.user;
+
+    // Generate MFA secret and TOTP URI for the user
+    users[email].mfaSecret = mfaAuthy.generateMFAAuthKey();
+    const totpUri = mfaAuthy.generateTotpUri(users[email].mfaSecret, email, 'MyApp', 'SHA1', 6, 30);
+    const mfaSecret = users[email].mfaSecret.toUpperCase().replace(/\s/g, '');
+
+    res.json({ totpUri, mfaSecret });
+});
+
+// Endpoint to enable MFA
+app.post('/enable-mfa', isAuthenticated, (req, res) => {
+    const { email } = req.session.user;
+    const { token } = req.body;
+
+    const isTokenValid = mfaAuthy.verifyMFAAuthToken(users[email].mfaSecret, token);
+
+    if (isTokenValid) {
+        users[email].mfaEnabled = true;
+        res.json({ success: true, message: 'MFA enabled successfully' });
+    } else {
+        res.status(401).json({ error: 'Invalid token, MFA not set up for the user' });
+    }
+});
+
+// Endpoint to verify MFA during login
+app.post('/verify-mfa', isAuthenticated, (req, res) => {
+    const { email, mfaToken } = req.body;
+    if(email != req.session.user.email) return res.status(401).json({ error: 'Unauthorized' } );
+
+    // Verify the MFA token
+    const isTokenValid = mfaAuthy.verifyMFAAuthToken(users[email].mfaSecret, mfaToken);
+
+    if (isTokenValid) {
+        res.json({ success: true, message: 'Logged in successfully with 2FA' });
+    } else {
+        res.status(401).json({ error: 'Invalid 2FA token' });
+    }
+});
+
+// Endpoint to disable MFA
+app.post('/disable-mfa', isAuthenticated, (req, res) => {
+    const { email } = req.session.user;
+    const { password } = req.body;
+
+    // Check if the password is correct
+    if (users[email].password !== password) {
+        res.status(401).json({ error: 'Invalid password' });
+    }
+
+    // Disable MFA for the user
+    users[email].mfaEnabled = false;
+    users[email].mfaSecret = null;
+
+    res.json({ success: true, message: 'MFA disabled successfully' });
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});

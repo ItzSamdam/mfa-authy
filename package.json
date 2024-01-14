@@ -13,6 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/ItzSamdam/mfa-authy"
   },
+  "license": "MIT",
   "keywords": [
     "auth",
     "2fa",
