@@ -47,12 +47,12 @@ app.post('/login', (req, res) => {
 });
 
 // Endpoint to set up MFA
-app.post('/setup-mfa', isAuthenticated, (req, res) => {
+app.post('/setup-mfa', isAuthenticated, async (req, res) => {
     const { email } = req.session.user;
 
     // Generate MFA secret and TOTP URI for the user
     users[email].mfaSecret = mfaAuthy.generateMFAAuthKey();
-    const totpUri = mfaAuthy.generateTotpUri(users[email].mfaSecret, email, 'MyApp', 'SHA1', 6, 30);
+    const totpUri = await mfaAuthy.generateTotpUri(users[email].mfaSecret, email, 'MyApp', 'SHA1', 6, 30);
     const mfaSecret = users[email].mfaSecret.toUpperCase().replace(/\s/g, '');
 
     res.json({ totpUri, mfaSecret });

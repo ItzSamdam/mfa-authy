@@ -1,10 +1,14 @@
 # MFA-AUTHY
 
+This TypeScript library provides functions for Multi-Factor Authentication (MFA), including generating MFA authentication keys, tokens, verifying tokens, and generating Time-based One-Time Password (TOTP) URIs.
 
 [![npm version](https://badge.fury.io/js/mfa-authy.svg)](https://badge.fury.io/js/mfa-authy)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![NPM Downloads](https://img.shields.io/npm/dw/mfa-authy)
 
-This TypeScript library provides functions for Multi-Factor Authentication (MFA), including generating MFA authentication keys, tokens, verifying tokens, and generating Time-based One-Time Password (TOTP) URIs.
+
+
+
 
 It Can be with various authenticator devices, including 
 - Google Authenticator,
@@ -47,8 +51,9 @@ console.log('Is Authenticator Token Valid?', isTokenValid);
 ### Generating URI (barcode/QR code) for Authenticator Apps
 
 This functions returns a base64 encoded URI that can be scanned by authenticator apps, such as Google Authenticator, Authy, and Microsoft Authenticator.
+Updated to an Async function to allow for the use of await.
 ```typescript
-const totpUri = generateTotpUri(generatedKey, 'user@example.com', 'MyAuthenticatorApp', 'SHA256', 8, 60);
+const totpUri = await generateTotpUri(generatedKey, 'user@example.com', 'MyAuthenticatorApp', 'SHA256', 8, 60);
 ```
 
 ```base64
@@ -111,12 +116,12 @@ app.post('/login', (req, res) => {
 });
 
 // Endpoint to set up MFA
-app.post('/setup-mfa', isAuthenticated, (req, res) => {
+app.post('/setup-mfa', isAuthenticated, async (req, res) => {
     const { email } = req.session.user;
 
     // Generate MFA secret and TOTP URI for the user
     users[email].mfaSecret = mfaAuthy.generateMFAAuthKey();
-    const totpUri = mfaAuthy.generateTotpUri(users[email].mfaSecret, email, 'MyApp', 'SHA1', 6, 30);
+    const totpUri = await mfaAuthy.generateTotpUri(users[email].mfaSecret, email, 'MyApp', 'SHA1', 6, 30);
     const mfaSecret = users[email].mfaSecret.toUpperCase().replace(/\s/g, '');
 
     res.json({ totpUri, mfaSecret });
