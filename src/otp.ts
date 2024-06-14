@@ -5,14 +5,12 @@ import * as notp from 'notp';
 
 export function generateOtpKey(): Buffer {
     // 20 cryptographically random binary bytes (160-bit key)
-    const key: Buffer = crypto.randomBytes(20);
-    return key;
+    return crypto.randomBytes(20);
 }
 
 export function encodeMFAAuthKey(bin: Buffer): string {
     const base32: string = b32.encode(bin).toString('utf8').replace(/=/g, '');
-    const key: string = base32.toLowerCase().replace(/(\w{4})/g, '$1 ').trim();
-    return key;
+    return base32.toLowerCase().replace(/(\w{4})/g, '$1 ').trim();
 }
 
 export function generateMFAAuthKey(): string {
@@ -20,9 +18,8 @@ export function generateMFAAuthKey(): string {
 }
 
 export function decodeMFAAuthKey(key: string): Buffer {
-    const unformatted: string = key.replace(/\W+/g, '').toUpperCase();
-    const bin: Buffer = b32.decode(unformatted);
-    return bin;
+    const plaintext: string = key.replace(/\W+/g, '').toUpperCase();
+    return b32.decode(plaintext);
 }
 
 export function generateMFAAuthToken(key: string): string {

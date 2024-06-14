@@ -25,6 +25,5 @@ export async function generateTotpUri(
         `&period=${timePeriod}`;
 
     // Convert TOTP URI to QR code
-    const qrCodeDataURL = await qrcode.toDataURL(uri);
-    return qrCodeDataURL;
+    return await qrcode.toDataURL(uri);
 }

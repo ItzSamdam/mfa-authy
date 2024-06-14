@@ -6,7 +6,7 @@ import {
     generateMFAAuthToken,
     verifyMFAAuthToken,
     generateTotpUri,
-} from '../src/index';
+} from '../src';
 
 describe('MFA Functions', () => {
     test('generateMFAAuthKey should return a non-empty string', () => {
