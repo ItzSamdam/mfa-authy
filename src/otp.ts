@@ -29,10 +29,8 @@ export function generateMFAAuthToken(key: string): string {
 
 export function verifyMFAAuthToken(key: string, token: string, option?: { window: number, time: number }): boolean {
     const bin: Buffer = decodeMFAAuthKey(key);
-
     // window is +/- 1 period of 30 seconds
     const verificationResult = notp.totp.verify(token, bin, { window: option?.window || 1, time: option?.time || 30 });
-
     // Explicitly return a boolean value
     return verificationResult !== null;
 }
